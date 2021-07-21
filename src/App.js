@@ -1,49 +1,20 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { HashRouter, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import About from "./routes/About";
+import Detail from "./routes/Detail";
+import Navigation from "./components/Navigation";
+import "./App.css";
 
-class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    console.log("Hello");
-  }
-
-  state = {
-    count: 0,
-  };
-
-  add = () => {
-    console.log("add");
-    // this.state.count += 1;     // Do not mutate state directly. Use setState()
-    // setState function call render function
-    // this.setState({ count: this.state.count + 1 });  // Not a good method...
-    this.setState(current => ({ count: current.count + 1}));
-  }
-
-  sub = () => {
-    console.log("sub");
-    this.setState(current => ({ count: current.count - 1 }));
-  }
-
-  componentDidMount() {
-    console.log("I just rendered first!");
-  }
-
-  componentDidUpdate() {
-    console.log("I just updated!");
-  }
-
-  render() {
-    console.log("I'm rendering!");
-    return (
-    <div>
-      <h1>The number is: {this.state.count}</h1>
-      <button onClick={this.add}>Add</button>
-      <button onClick={this.sub}>Sub</button>
-    </div>
-    );
-  }
+function App() {
+  return (
+    <HashRouter>
+      <Navigation />
+      <Route path="/" exact={true} component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/movie/:id" component={Detail} />
+    </HashRouter>
+  );
 }
-
 
 export default App;
